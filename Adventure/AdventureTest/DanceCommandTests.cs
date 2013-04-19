@@ -36,7 +36,7 @@ namespace AdventureTest
         }
 
         [TestMethod]
-        public void Should_Handle_Uppercases()
+        public void Should_Handle_Uppercases_With_Spaces()
         {
             // Arrange
 

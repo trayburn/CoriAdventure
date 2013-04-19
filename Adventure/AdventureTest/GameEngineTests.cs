@@ -18,7 +18,7 @@ namespace AdventureTest
             mockConsole.Stub(e => e.ReadLine()).Return("exit");
             var mockCommand = MockRepository.GenerateMock<ICommand>();
             mockCommand.Stub(e => e.IsValid(Arg<string>.Is.Anything)).Return(false);
-            var engine = new GameEngine(mockConsole, mockCommand);
+            var engine = new GameEngine(mockConsole, new[] { mockCommand });
 
             // Act
             engine.Run();
@@ -33,10 +33,10 @@ namespace AdventureTest
         {
             // Arrange
             var mockConsole = MockRepository.GenerateMock<IConsoleFacade>();
-            mockConsole.Stub(e => e.ReadLine()).Return("do a little dance");
-            mockConsole.Stub(e => e.ReadLine()).Return("make a little love");
+            mockConsole.Stub(e => e.ReadLine()).Return("do a little dance").Repeat.Times(1);
+            mockConsole.Stub(e => e.ReadLine()).Return("make a little love").Repeat.Times(1);
             mockConsole.Stub(e => e.ReadLine()).Return("get down tonight").Repeat.Times(2);
-            mockConsole.Stub(e => e.ReadLine()).Return("exit");
+            mockConsole.Stub(e => e.ReadLine()).Return("exit").Repeat.Times(1);
             var cmd1 = MockRepository.GenerateMock<ICommand>();
             var cmd2 = MockRepository.GenerateMock<ICommand>();
             var engine = new GameEngine(mockConsole, new[] { cmd1, cmd2 });
@@ -45,8 +45,8 @@ namespace AdventureTest
             engine.Run();
 
             // Assert
-            cmd1.AssertWasCalled(e => e.IsValid(Arg<string>.Is.Anything), mo => mo.Repeat.Times(5));
-            cmd2.AssertWasCalled(e => e.IsValid(Arg<string>.Is.Anything), mo => mo.Repeat.Times(5));
+            cmd1.AssertWasCalled(e => e.IsValid(Arg<string>.Is.Anything), mo => mo.Repeat.Times(4));
+            cmd2.AssertWasCalled(e => e.IsValid(Arg<string>.Is.Anything), mo => mo.Repeat.Times(4));
         }
     }
 }

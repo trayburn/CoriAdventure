@@ -1,4 +1,6 @@
 ﻿using Adventure.Logic;
+using Adventure.Logic.Abstractions;
+using Adventure.Logic.Commands;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using System;
@@ -21,55 +23,8 @@ namespace Adventure
                 Component.For<GameEngine>()
                 );
 
-
-
             var engine = container.Resolve<GameEngine>();
             engine.Run();
         }
     }
-
-
-    public class ConsoleFacade : IConsoleFacade
-    {
-        public void Write(string value)
-        {
-            Console.Write(value);
-        }
-
-        public void WriteLine(string value)
-        {
-            Console.WriteLine(value);
-        }
-
-        public string ReadLine()
-        {
-            return Console.ReadLine();
-        }
-    }
-
-
-
-
-    public class DanceCommand : ICommand
-    {
-        private IConsoleFacade console;
-
-        public DanceCommand(IConsoleFacade console)
-        {
-            this.console = console;
-        }
-
-        public bool IsValid(string input)
-        {
-            return input == "dance";
-        }
-
-        public void Execute(string input)
-        {
-            console.WriteLine("You dance around like a fool");
-        }
-    }
-
-
-
 }

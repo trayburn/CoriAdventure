@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Adventure.Logic.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,23 +7,10 @@ using System.Threading.Tasks;
 
 namespace Adventure.Logic
 {
-
-    public interface IConsoleFacade
-    {
-        void Write(string value);
-        void WriteLine(string value);
-        string ReadLine();
-    }
-    public interface ICommand
-    {
-        bool IsValid(string input);
-        void Execute(string input);
-    }
-
     public class GameEngine
     {
-        private IConsoleFacade console;
-        private ICommand command;
+        private readonly IConsoleFacade console;
+        private readonly ICommand command;
 
         public GameEngine(IConsoleFacade console, ICommand command)
         {

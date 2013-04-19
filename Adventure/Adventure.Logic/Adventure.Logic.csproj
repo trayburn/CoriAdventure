@@ -39,7 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Commands\DanceCommand.cs" />
+    <Compile Include="ConsoleFacade.cs" />
+    <Compile Include="GameEngine.cs" />
+    <Compile Include="Abstractions\ICommand.cs" />
+    <Compile Include="Abstractions\IConsoleFacade.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

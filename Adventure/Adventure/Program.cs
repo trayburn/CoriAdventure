@@ -2,6 +2,7 @@
 using Adventure.Logic.Abstractions;
 using Adventure.Logic.Commands;
 using Castle.MicroKernel.Registration;
+using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using Castle.Windsor;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,9 @@ namespace Adventure
         static void Main(string[] args)
         {
             var container = new WindsorContainer();
+
+            // Hint :
+            // container.Kernel.Resolver.AddSubResolver(new ArrayResolver(container.Kernel));
 
             container.Register(
                 Component.For<IConsoleFacade>().ImplementedBy<ConsoleFacade>(),
